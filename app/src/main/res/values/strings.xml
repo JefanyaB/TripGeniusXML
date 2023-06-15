@@ -5,7 +5,7 @@
     <string name="title_registrasi">Fill your identity first</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
-    <string name="name">Nama</string>
+    <string name="name">Name</string>
     <string name="greeting">Halo %1$s,</string>
     <string name="logout">LogOut</string>
     <string name="create_post">Post your story</string>
@@ -13,7 +13,7 @@
     <string name="story">Tell us you story today</string>
     <string name="timestamp">timestamp</string>
     <string name="user_name">user name</string>
-    <string name="description">description</string>
+
     <string name="exit">Exit</string>
     <string name="phone">Phone Number</string>
     <string name="age">Age</string>
@@ -25,5 +25,8 @@
     <string name="title_notifications">Notifications</string>
     <string name="destinasi">Destinasi</string>
     <string name="deskripsi">Deskripsi</string>
-    <string name="sub_title">Maybe you will like</string>
+
+    <string name="description">Description</string>
+    <string name="sub_title">--- You might like it ---</string>
+    <string name="recom_place">Restaurant Recommendations</string>
 </resources>

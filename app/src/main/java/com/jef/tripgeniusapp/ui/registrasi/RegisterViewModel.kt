@@ -57,4 +57,5 @@ class RegisterViewModel(private val pref : UserPreference) : ViewModel() {
             }
         })
     }
+
 }

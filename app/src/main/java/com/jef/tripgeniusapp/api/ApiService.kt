@@ -1,11 +1,13 @@
 package com.jef.tripgeniusapp.api
 
 
+import com.jef.tripgeniusapp.model.request.DestinationRequest
 import com.jef.tripgeniusapp.model.request.LoginRequest
 import com.jef.tripgeniusapp.model.request.RegisterRequest
 import com.jef.tripgeniusapp.model.response.DestinasiResponse
 import com.jef.tripgeniusapp.model.response.LoginResponse
 import com.jef.tripgeniusapp.model.response.RegisterResponse
+import com.jef.tripgeniusapp.model.response.UserResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -22,15 +24,13 @@ interface ApiService {
         @Body request: LoginRequest,
     ): Call<LoginResponse>
 
-    @GET("/v1/data/destination/{id}")
+    @GET("/v1/data/destination/")
     fun getDestination(
-        @Path("id") id:Int,
         @Header("Authorization")token:String
     ):Call<DestinasiResponse>
 
-    @GET("/search/users")
+    @GET("/v1/list")
     fun getUsers(
-        @Query("age") age: String,
         @Header("Authorization") token: String
-    ):  Call<LoginResponse>
+    ):  Call<UserResponse>
 }

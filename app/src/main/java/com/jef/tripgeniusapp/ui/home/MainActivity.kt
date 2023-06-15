@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -14,8 +15,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jef.tripgeniusapp.R
 import com.jef.tripgeniusapp.ViewModelFactory
+import com.jef.tripgeniusapp.adapter.DestinasiAdapter
 import com.jef.tripgeniusapp.databinding.ActivityMainBinding
 import com.jef.tripgeniusapp.model.UserPreference
+import com.jef.tripgeniusapp.model.response.ListDestinasi
 import com.jef.tripgeniusapp.ui.login.LoginActivity
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -29,35 +32,38 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setUpViewModel()
+        val layoutManager = LinearLayoutManager(this)
+        binding.rvDestinasi.layoutManager = layoutManager
+
+        setupViewModel()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
-        inflater.inflate(R.menu.menu_option,menu)
+        inflater.inflate(R.menu.option_menu, menu)
+
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.menu1 ->{
-                finishAffinity()
-            }
-            R.id.menu2 ->{
+        when (item.itemId) {
+            R.id.menu1 -> {
                 mainViewModel.logout()
+            }
+            R.id.menu2 -> {
+                finishAffinity()
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setUpViewModel() {
+    private fun setupViewModel() {
         mainViewModel = ViewModelProvider(
             this,
-            ViewModelFactory(UserPreference.getInstance(dataStore))
-        )[MainViewModel::class.java]
+            ViewModelFactory(UserPreference.getInstance(dataStore)))[MainViewModel::class.java]
         mainViewModel.getUser().observe(this) { user ->
             if (user.accessToken.isNotEmpty()) {
-                mainViewModel.getStory(user.accessToken)
+                mainViewModel.getDestinasi(user.accessToken)
             } else {
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
@@ -66,9 +72,16 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.isLoading.observe(this) {
             showLoading(it)
         }
+
+        mainViewModel.listDestinasi.observe(this) { destinasi ->
+            setUserData(destinasi.data as List<ListDestinasi>)
+        }
     }
 
-
+    private fun setUserData(destinasi: List<ListDestinasi>) {
+        val destinasiAdapter = DestinasiAdapter(destinasi)
+        binding.rvDestinasi.adapter = destinasiAdapter
+    }
 
     private fun showLoading(isLoading: Boolean) {
         if (isLoading) {
@@ -77,4 +90,5 @@ class MainActivity : AppCompatActivity() {
             binding.progressBar.visibility = View.GONE
         }
     }
+
 }

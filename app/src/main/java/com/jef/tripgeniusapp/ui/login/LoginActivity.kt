@@ -47,10 +47,10 @@ class LoginActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        emailText = binding.emailText
-        passwordText = binding.passwordText
-        loginButton = binding.loginButton
-        registerButton = binding.registerButton
+        emailText = binding.email
+        passwordText = binding.password
+        loginButton = binding.btnLogin
+        registerButton = binding.btnRegister
 
         setUpView()
         setUpViewModel()
@@ -109,17 +109,17 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setUpAction() {
         loginButton.setOnClickListener {
-            val email = binding.emailText.text.toString()
-            val password = binding.passwordText.text.toString()
+            val email = binding.email.text.toString()
+            val password = binding.password.text.toString()
             when {
                 email.isEmpty() -> {
-                    binding.emailText.error = "Your email still empty"
+                    binding.email.error = "Your email still empty"
                 }
                 password.isEmpty() -> {
-                    binding.passwordText.error = "Your password still empty"
+                    binding.password.error = "Your password still empty"
                 }
-                !isValidInputEmail(binding.emailText.text.toString()) -> {
-                    binding.emailText.error = "Your email is not valid"
+                !isValidInputEmail(binding.email.text.toString()) -> {
+                    binding.email.error = "Your email is not valid"
                 }
                 else -> {
                     loginViewModel.loginUser(email, password)

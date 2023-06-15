@@ -12,4 +12,7 @@
     <color name="navi">#2D3D4F</color>
     <color name="pink_500">#D81B60</color>
     <color name="pink_200">#FF8FAF</color>
+    <color name="grey">#bababa</color>
+    <color name="dark_grey">#7d7d7d</color>
+    <color name="tulisan">#000000</color>
 </resources>

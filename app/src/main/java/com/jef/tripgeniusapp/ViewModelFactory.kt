@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.jef.tripgeniusapp.model.UserPreference
 import com.jef.tripgeniusapp.ui.home.MainViewModel
 import com.jef.tripgeniusapp.ui.login.LoginViewModel
+import com.jef.tripgeniusapp.ui.profile.ProfileViewModel
 import com.jef.tripgeniusapp.ui.registrasi.RegisterViewModel
 
 class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.NewInstanceFactory() {
@@ -20,6 +21,9 @@ class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.New
             }
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(pref) as T
+            }
+            modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
+                ProfileViewModel(pref) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

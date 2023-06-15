@@ -27,11 +27,11 @@ class DetailActivity : AppCompatActivity() {
         Log.d("udah", description.toString())
         val photo = intent.getStringExtra("photo")
         Log.d("udah", photo.toString())
-
-        Glide.with(applicationContext).load(photo).into(binding.storyImageView)
-        binding.name.text = name
-        binding.description.text = description
-        binding.timestamp.text = timeStamp
+//
+//        Glide.with(applicationContext).load(photo).into(binding.storyImageView)
+//        binding.name.text = name
+//        binding.description.text = description
+//        binding.timestamp.text = timeStamp
 
     }
 }
