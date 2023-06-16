@@ -49,21 +49,21 @@
             android:textSize="18sp"
             android:textStyle="bold">
         </TextView>
+
         <com.jef.tripgeniusapp.customview.EditText
             android:id="@+id/email"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="325dp"
+            android:layout_height="36dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="30dp"
+            android:background="@color/white"
             android:elevation="3dp"
+            android:hint="type your email here"
+            android:inputType="textEmailAddress"
             android:paddingLeft="10dp"
             android:textColorHint="@color/grey"
-            android:hint="type your email here"
-            android:textSize="14sp"
-            android:inputType="textEmailAddress">
-        </com.jef.tripgeniusapp.customview.EditText>
+            android:textSize="14sp"></com.jef.tripgeniusapp.customview.EditText>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,23 +73,23 @@
             android:textSize="18sp"
             android:textStyle="bold">
         </TextView>
+
         <com.jef.tripgeniusapp.customview.EditText
             android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="318dp"
+            android:layout_height="35dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="30dp"
-            android:textColorHint="@color/grey"
-            android:textSize="14sp"
-            android:elevation="3dp"
-            android:paddingLeft="10dp"
             android:background="@color/white"
+            android:drawableEnd="@drawable/ic_baseline_visibility_off_24"
+            android:elevation="3dp"
             android:hint="type your password here"
             android:inputType="textPassword"
-            android:drawableEnd="@drawable/ic_baseline_visibility_off_24"
-            android:longClickable="false">
-        </com.jef.tripgeniusapp.customview.EditText>
+            android:longClickable="false"
+            android:paddingLeft="10dp"
+            android:textColorHint="@color/grey"
+            android:textSize="14sp"></com.jef.tripgeniusapp.customview.EditText>
 
         <com.jef.tripgeniusapp.customview.LoginButton
             android:id="@+id/btn_login"

@@ -39,7 +39,9 @@ class DetailActivity : AppCompatActivity() {
         val photo = intent.getStringExtra("photo")
 
         Glide.with(applicationContext).load(photo).into(binding.image1)
+
         binding.tvDestinasi.text = name
+        Log.d("lucu",name.toString())
         binding.tvDeskripsi.text = description
         binding.text2.text = restaurant[2].restoName
 

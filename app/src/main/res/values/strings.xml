@@ -25,7 +25,12 @@
     <string name="title_profile">Profile</string>
     <string name="destinasi">Destinasi</string>
     <string name="deskripsi">Deskripsi</string>
-
+    <string name="destinasi2">Gunung Tangguban Perahu</string>
+    <string name="deskripsi2">Gunung Tangkuban Parahu) adalah salah satu gunung yang terletak di Lembang, Kabupaten Bandung Barat, Provinsi Jawa Barat,
+                              Indonesia. Sekitar 20 km ke arah utara Kota Bandung, dengan rimbun pohon pinus dan hamparan kebun teh di sekitarnya, Gunung Tangkuban
+                              Parahu mempunyai ketinggian setinggi 2.084 meter. Bentuk gunung ini adalah Stratovulcano dengan pusat erupsi yang berpindah dari timur ke
+                              barat. Jenis batuan yang dikeluarkan melalui letusan kebanyakan adalah lava dan sulfur,
+                              mineral yang dikeluarkan adalah sulfur belerang, mineral yang dikeluarkan saat gunung tidak aktif adalah uap belerang.</string>
     <string name="description">Description</string>
     <string name="sub_title">--- You might like it ---</string>
     <string name="recom_place">Restaurant Recommendations</string>
