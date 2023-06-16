@@ -3,6 +3,9 @@ package com.jef.tripgeniusapp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.jef.tripgeniusapp.model.UserPreference
+import com.jef.tripgeniusapp.ui.detail.DetailActivity
+import com.jef.tripgeniusapp.ui.detail.DetailActivityViewModel
+import com.jef.tripgeniusapp.ui.home.HomeViewModel
 import com.jef.tripgeniusapp.ui.home.MainViewModel
 import com.jef.tripgeniusapp.ui.login.LoginViewModel
 import com.jef.tripgeniusapp.ui.profile.ProfileViewModel
@@ -25,7 +28,12 @@ class ViewModelFactory(private val pref: UserPreference) : ViewModelProvider.New
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
                 ProfileViewModel(pref) as T
             }
-
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(pref) as T
+            }
+            modelClass.isAssignableFrom(DetailActivityViewModel::class.java) -> {
+                DetailActivityViewModel(pref) as T
+            }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }

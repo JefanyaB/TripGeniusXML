@@ -1,37 +1,75 @@
 package com.jef.tripgeniusapp.ui.detail
 
+import android.content.ContentValues
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.jef.tripgeniusapp.R
+import com.jef.tripgeniusapp.ViewModelFactory
 import com.jef.tripgeniusapp.databinding.ActivityDetailBinding
+import com.jef.tripgeniusapp.model.UserPreference
+import com.jef.tripgeniusapp.model.response.DataItem
+import com.jef.tripgeniusapp.model.response.UserData
+import com.jef.tripgeniusapp.ui.home.MainViewModel
+import com.jef.tripgeniusapp.ui.profile.ProfileViewModel
 
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 class DetailActivity : AppCompatActivity() {
 
-
+    private lateinit var detailActivityViewModel: DetailActivityViewModel
     private lateinit var binding: ActivityDetailBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        setUpUser()
+        setupViewModel()
     }
-    private fun setUpUser(){
+    private fun setUpRestaurant(restaurant: List<DataItem>){
         val name = intent.getStringExtra("userName")
-        Log.d("udah", name.toString())
-        val timeStamp = intent.getStringExtra("timeStamp")
-        Log.d("udah", timeStamp.toString())
         val description = intent.getStringExtra("description")
-        Log.d("udah", description.toString())
         val photo = intent.getStringExtra("photo")
-        Log.d("udah", photo.toString())
-//
-//        Glide.with(applicationContext).load(photo).into(binding.storyImageView)
-//        binding.name.text = name
-//        binding.description.text = description
-//        binding.timestamp.text = timeStamp
 
+        Glide.with(applicationContext).load(photo).into(binding.image1)
+        binding.tvDestinasi.text = name
+        binding.tvDeskripsi.text = description
+        binding.text2.text = restaurant[2].restoName
+
+
+    }
+    private fun setupViewModel() {
+        detailActivityViewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(UserPreference.getInstance(dataStore))
+        )[DetailActivityViewModel::class.java]
+        showLoading(true)
+        detailActivityViewModel.getUser().observe(this) { user ->
+            if (user.accessToken.isNotEmpty()) {
+                detailActivityViewModel.getDestinastion(user.accessToken)
+
+            } else {
+                Log.e(ContentValues.TAG, "onFailure")
+            }
+        }
+        detailActivityViewModel.listRestaurant.observe(this) { restaurant ->
+            setUpRestaurant(restaurant.data as List<DataItem>)
+        }
+    }
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 }
+
+

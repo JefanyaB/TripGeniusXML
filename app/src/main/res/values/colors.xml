@@ -15,4 +15,5 @@
     <color name="grey">#bababa</color>
     <color name="dark_grey">#7d7d7d</color>
     <color name="tulisan">#000000</color>
+    <color name="dark_gray">#5A5A5A</color>
 </resources>

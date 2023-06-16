@@ -21,12 +21,13 @@
     <string name="location">Jawa Barat, Bandung</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_list">List</string>
+    <string name="title_profile">Profile</string>
     <string name="destinasi">Destinasi</string>
     <string name="deskripsi">Deskripsi</string>
 
     <string name="description">Description</string>
     <string name="sub_title">--- You might like it ---</string>
     <string name="recom_place">Restaurant Recommendations</string>
+    <string name="judul">Judul</string>
 </resources>

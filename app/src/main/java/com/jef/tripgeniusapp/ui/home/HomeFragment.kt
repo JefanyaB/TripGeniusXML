@@ -48,14 +48,14 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater,container,false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+
         val layoutManager = LinearLayoutManager(requireContext())
         binding.rvDestinasi.layoutManager = layoutManager
 
         setupViewModel()
-
     }
     private fun setupViewModel() {
         homeViewModel = ViewModelProvider(

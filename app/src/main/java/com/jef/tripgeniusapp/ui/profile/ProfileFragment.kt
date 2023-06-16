@@ -17,9 +17,11 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import com.jef.tripgeniusapp.R
 import com.jef.tripgeniusapp.ViewModelFactory
+import com.jef.tripgeniusapp.adapter.DestinasiAdapter
 import com.jef.tripgeniusapp.databinding.FragmentProfileBinding
 import com.jef.tripgeniusapp.model.UserPreference
 import com.jef.tripgeniusapp.model.response.ListDestinasi
+import com.jef.tripgeniusapp.model.response.UserData
 import com.jef.tripgeniusapp.ui.home.MainViewModel
 import com.jef.tripgeniusapp.ui.login.LoginActivity
 
@@ -31,12 +33,7 @@ class ProfileFragment : Fragment() {
     }
     private lateinit var profileViewModel: ProfileViewModel
     private lateinit var binding : FragmentProfileBinding
-    private lateinit var get_name : TextView
-    private lateinit var get_gender : TextView
-    private lateinit var get_location : TextView
-    private lateinit var get_email : TextView
-    private lateinit var get_phone : TextView
-    private lateinit var get_age : TextView
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +44,6 @@ class ProfileFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?){
         super.onViewCreated(view, savedInstanceState)
-        profileViewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
 
         setupViewModel()
 
@@ -57,13 +53,32 @@ class ProfileFragment : Fragment() {
             this,
             ViewModelFactory(UserPreference.getInstance(requireContext().dataStore))
         )[ProfileViewModel::class.java]
+        showLoading(true)
         profileViewModel.getUser().observe(this) { user ->
             if (user.accessToken.isNotEmpty()) {
                 profileViewModel.getProfileUser(user.accessToken)
-                Log.d("Adatokeen", user.accessToken)
+
             } else {
                 Log.e(ContentValues.TAG, "onFailure")
             }
+        }
+        profileViewModel.profileUser.observe(this) { profile ->
+            setProfile(profile.data)
+        }
+    }
+    private fun setProfile(profile: UserData) {
+        binding.getName.text = profile.name
+        Log.d("NamaSaya", profile.name)
+        binding.getAge.text = profile.age
+        binding.getEmail.text = profile.email
+        binding.getPhone.text = profile.phone
+        binding.getLocation.text = profile.location
+    }
+    private fun showLoading(isLoading: Boolean) {
+        if (isLoading) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
         }
     }
 }
