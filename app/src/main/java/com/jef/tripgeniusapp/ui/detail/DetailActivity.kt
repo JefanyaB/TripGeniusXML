@@ -3,10 +3,13 @@ package com.jef.tripgeniusapp.ui.detail
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -34,7 +37,7 @@ class DetailActivity : AppCompatActivity() {
         setupViewModel()
     }
     private fun setUpRestaurant(restaurant: List<DataItem>){
-        val name = intent.getStringExtra("userName")
+        val name = intent.getStringExtra("name")
         val description = intent.getStringExtra("description")
         val photo = intent.getStringExtra("photo")
 
@@ -44,8 +47,21 @@ class DetailActivity : AppCompatActivity() {
         Log.d("lucu",name.toString())
         binding.tvDeskripsi.text = description
         binding.text2.text = restaurant[2].restoName
+        setUpView()
 
 
+    }
+    private fun setUpView() {
+        @Suppress("DEPRECATION")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
+        }
+        supportActionBar?.hide()
     }
     private fun setupViewModel() {
         detailActivityViewModel = ViewModelProvider(

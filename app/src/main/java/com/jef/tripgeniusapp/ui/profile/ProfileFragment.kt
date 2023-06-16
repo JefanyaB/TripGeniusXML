@@ -53,7 +53,7 @@ class ProfileFragment : Fragment() {
             this,
             ViewModelFactory(UserPreference.getInstance(requireContext().dataStore))
         )[ProfileViewModel::class.java]
-        showLoading(true)
+//        showLoading(true)
         profileViewModel.getUser().observe(this) { user ->
             if (user.accessToken.isNotEmpty()) {
                 profileViewModel.getProfileUser(user.accessToken)
@@ -68,17 +68,16 @@ class ProfileFragment : Fragment() {
     }
     private fun setProfile(profile: UserData) {
         binding.getName.text = profile.name
-        Log.d("NamaSaya", profile.name)
         binding.getAge.text = profile.age
         binding.getEmail.text = profile.email
         binding.getPhone.text = profile.phone
         binding.getLocation.text = profile.location
     }
-    private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
-    }
+//    private fun showLoading(isLoading: Boolean) {
+//        if (isLoading) {
+//            binding.progressBar.visibility = View.VISIBLE
+//        } else {
+//            binding.progressBar.visibility = View.GONE
+//        }
+//    }
 }

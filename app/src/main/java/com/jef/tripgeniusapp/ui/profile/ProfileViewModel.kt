@@ -26,7 +26,6 @@ class ProfileViewModel(private val pref: UserPreference) : ViewModel() {
     val profileUser: LiveData<UserResponse> = _profileUser
 
     fun getProfileUser(token : String){
-        _isLoading.value = true
         val client = ApiConfig().getApiService().getUsers("Bearer $token")
         client.enqueue(object : Callback<UserResponse> {
             override fun onResponse(
@@ -44,7 +43,7 @@ class ProfileViewModel(private val pref: UserPreference) : ViewModel() {
                 }
             }
             override fun onFailure(call: Call<UserResponse>, t: Throwable) {
-                _isLoading.value = false
+
                 Log.e(ContentValues.TAG, "onFailure: ${t.message}")
             }
         })
