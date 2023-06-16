@@ -67,11 +67,11 @@ class ProfileFragment : Fragment() {
         }
     }
     private fun setProfile(profile: UserData) {
+
         binding.getName.text = profile.name
         binding.getAge.text = profile.age
         binding.getEmail.text = profile.email
-        binding.getPhone.text = profile.phone
-        binding.getLocation.text = profile.location
+
     }
 //    private fun showLoading(isLoading: Boolean) {
 //        if (isLoading) {
