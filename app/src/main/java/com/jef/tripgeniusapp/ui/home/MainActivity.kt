@@ -29,11 +29,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        val layoutManager = LinearLayoutManager(this)
-        binding.rvDestinasi.layoutManager = layoutManager
 
         setupViewModel()
     }
@@ -48,10 +43,10 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu1 -> {
-                mainViewModel.logout()
+                finishAffinity()
             }
             R.id.menu2 -> {
-                finishAffinity()
+                mainViewModel.logout()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -62,33 +57,10 @@ class MainActivity : AppCompatActivity() {
             this,
             ViewModelFactory(UserPreference.getInstance(dataStore)))[MainViewModel::class.java]
         mainViewModel.getUser().observe(this) { user ->
-            if (user.accessToken.isNotEmpty()) {
-                mainViewModel.getDestinasi(user.accessToken)
-            } else {
+            if (user.accessToken.isEmpty()) {
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
         }
-        mainViewModel.isLoading.observe(this) {
-            showLoading(it)
-        }
-
-        mainViewModel.listDestinasi.observe(this) { destinasi ->
-            setUserData(destinasi.data as List<ListDestinasi>)
-        }
     }
-
-    private fun setUserData(destinasi: List<ListDestinasi>) {
-        val destinasiAdapter = DestinasiAdapter(destinasi)
-        binding.rvDestinasi.adapter = destinasiAdapter
-    }
-
-    private fun showLoading(isLoading: Boolean) {
-        if (isLoading) {
-            binding.progressBar.visibility = View.VISIBLE
-        } else {
-            binding.progressBar.visibility = View.GONE
-        }
-    }
-
 }

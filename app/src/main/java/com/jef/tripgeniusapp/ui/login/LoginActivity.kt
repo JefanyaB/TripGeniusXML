@@ -55,7 +55,6 @@ class LoginActivity : AppCompatActivity() {
         setUpView()
         setUpViewModel()
         setUpAction()
-//        playAnimation()
 
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

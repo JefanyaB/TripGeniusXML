@@ -5,8 +5,10 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.jef.tripgeniusapp.api.ApiConfig
 import com.jef.tripgeniusapp.model.UserPreference
+import com.jef.tripgeniusapp.model.response.Data
 import com.jef.tripgeniusapp.model.response.ErrorResponse
 import com.jef.tripgeniusapp.model.response.UserResponse
 import retrofit2.Call
@@ -46,5 +48,8 @@ class ProfileViewModel(private val pref: UserPreference) : ViewModel() {
                 Log.e(ContentValues.TAG, "onFailure: ${t.message}")
             }
         })
+    }
+    fun getUser(): LiveData<Data> {
+        return pref.getUser().asLiveData()
     }
 }

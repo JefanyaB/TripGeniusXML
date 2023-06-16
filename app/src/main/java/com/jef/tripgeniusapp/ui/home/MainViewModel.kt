@@ -28,32 +28,31 @@ class MainViewModel(private val pref: UserPreference): ViewModel() {
     val listDestinasi: LiveData<DestinasiResponse> = _listDestinasi
 
 
-    fun getDestinasi(token : String) {
-        _isLoading.value = true
-
-        val page = DestinationRequest(2)
-        val client = ApiConfig().getApiService().getDestination("Bearer $token")
-        client.enqueue(object : Callback<DestinasiResponse> {
-            override fun onResponse(
-                call: Call<DestinasiResponse>,
-                response: Response<DestinasiResponse>
-            ){
-                _isLoading.value = false
-                if (response.isSuccessful) {
-                    val responseBody = response.body()
-                    if (responseBody != null) {
-                        _listDestinasi.value = response.body()
-                    }
-                } else {
-                    Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
-                }
-            }
-            override fun onFailure(call: Call<DestinasiResponse>, t: Throwable) {
-                _isLoading.value = false
-                Log.e(LoginViewModel.TAG, "onFailure: ${t.message.toString()}")
-            }
-        })
-    }
+//    fun getDestinasi(token : String) {
+//        _isLoading.value = true
+//
+//        val client = ApiConfig().getApiService().getDestination("Bearer $token")
+//        client.enqueue(object : Callback<DestinasiResponse> {
+//            override fun onResponse(
+//                call: Call<DestinasiResponse>,
+//                response: Response<DestinasiResponse>
+//            ){
+//                _isLoading.value = false
+//                if (response.isSuccessful) {
+//                    val responseBody = response.body()
+//                    if (responseBody != null) {
+//                        _listDestinasi.value = response.body()
+//                    }
+//                } else {
+//                    Log.e(ContentValues.TAG, "onFailure: ${response.message()}")
+//                }
+//            }
+//            override fun onFailure(call: Call<DestinasiResponse>, t: Throwable) {
+//                _isLoading.value = false
+//                Log.e(LoginViewModel.TAG, "onFailure: ${t.message.toString()}")
+//            }
+//        })
+//    }
 
     fun getUser(): LiveData<Data> {
         return pref.getUser().asLiveData()
