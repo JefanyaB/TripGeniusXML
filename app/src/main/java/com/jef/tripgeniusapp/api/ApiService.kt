@@ -21,9 +21,10 @@ interface ApiService {
         @Body request: LoginRequest,
     ): Call<LoginResponse>
 
-    @GET("/v1/data/allDestination/1")
+    @GET("/v1/machineLearning/destination")
     fun getDestination(
-        @Header("Authorization")token:String
+        @Header("Authorization")token:String,
+        @Query("id") ids:List<String>
     ):Call<DestinasiResponse>
 
     @GET("/v1/data/allRestaurant/2")

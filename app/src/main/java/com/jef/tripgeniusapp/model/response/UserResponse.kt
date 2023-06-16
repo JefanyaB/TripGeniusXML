@@ -35,5 +35,5 @@ data class UserData(
 	val username: String,
 
 	@field:SerializedName("age")
-	val age: String
+	val age: Int
 )

@@ -69,7 +69,7 @@ class ProfileFragment : Fragment() {
     private fun setProfile(profile: UserData) {
 
         binding.getName.text = profile.name
-        binding.getAge.text = profile.age
+        binding.getAge.text = profile.age.toString()
         binding.getEmail.text = profile.email
 
     }
